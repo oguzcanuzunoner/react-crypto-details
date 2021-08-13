@@ -4,6 +4,7 @@ const SingleCrypto = () => {
   const { cryptos } = useCrypto();
   const { id } = useParams();
   const filter = cryptos.filter((item) => item.id === id);
+
   return (
     <>
       {filter.map((item) => (
@@ -19,6 +20,21 @@ const SingleCrypto = () => {
           <h5>
             Price Change Percentage - 24h :{item.price_change_percentage_24h}
           </h5>
+          <img
+            alt={`${item.symbol.toUpperCase()} 7d chart`}
+            data-src={`https://www.coingecko.com/coins/${item.image.match(
+              /[0-9]+/
+            )}/sparkline`}
+            data-srcset={`https://www.coingecko.com/coins/${item.image.match(
+              /[0-9]+/
+            )}/sparkline 1x`}
+            src={`https://www.coingecko.com/coins/${item.image.match(
+              /[0-9]+/
+            )}/sparkline`}
+            srcSet={`https://www.coingecko.com/coins/${item.image.match(
+              /[0-9]+/
+            )}/sparkline 1x`}
+          ></img>
         </div>
       ))}
     </>
