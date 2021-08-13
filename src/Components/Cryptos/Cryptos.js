@@ -56,7 +56,12 @@ const Cryptos = () => {
                         />
                       </td>
                       <td>
-                        <Link to={val.id}>{val.name}</Link>
+                        <Link
+                          to={val.id}
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          {val.name}
+                        </Link>
                       </td>
                       <td>{val.symbol.toUpperCase()}</td>
                       <td>{val.current_price}</td>
