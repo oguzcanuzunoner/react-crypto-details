@@ -1,0 +1,13 @@
+.searchTerm {
+  width: 100%;
+  border: 3px solid red;
+  padding: 20px;
+  height: 20px;
+  outline: none;
+  color: yellow;
+  margin-bottom: 10px;
+}
+
+.searchTerm:focus {
+  color: #fcdab7;
+}

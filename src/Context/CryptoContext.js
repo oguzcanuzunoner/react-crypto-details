@@ -6,6 +6,10 @@ const CryptoContext = createContext();
 const CryptoProvider = ({ children }) => {
   const [cryptos, setCryptos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const getCryptoName = (e) => {
+    setSearch(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -23,6 +27,8 @@ const CryptoProvider = ({ children }) => {
     cryptos,
     setCryptos,
     loading,
+    search,
+    getCryptoName,
   };
 
   return (
