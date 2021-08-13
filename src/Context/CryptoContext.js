@@ -8,7 +8,7 @@ const CryptoProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const getCryptoName = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.toUpperCase());
   };
 
   useEffect(() => {

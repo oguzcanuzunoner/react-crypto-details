@@ -18,7 +18,7 @@ const Cryptos = () => {
                     className={styled.searchTerm}
                     type="text"
                     placeholder="Search..."
-                    value={search}
+                    value={search.toUpperCase()}
                     onChange={getCryptoName}
                   />
                 </div>
