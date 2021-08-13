@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext, useMemo } from "react";
 
 const CryptoContext = createContext();
 
@@ -23,13 +23,16 @@ const CryptoProvider = ({ children }) => {
       .catch((err) => alert(err));
   }, []);
 
-  const values = {
-    cryptos,
-    setCryptos,
-    loading,
-    search,
-    getCryptoName,
-  };
+  const values = useMemo(
+    () => ({
+      cryptos,
+      setCryptos,
+      loading,
+      search,
+      getCryptoName,
+    }),
+    [cryptos, loading, search]
+  );
 
   return (
     <CryptoContext.Provider value={values}>{children}</CryptoContext.Provider>

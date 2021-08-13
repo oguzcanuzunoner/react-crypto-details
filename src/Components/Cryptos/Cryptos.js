@@ -92,7 +92,10 @@ const Cryptos = () => {
                               }}
                             >
                               <ReactBootStrap.Button
-                                style={{ backgroundColor: "red" }}
+                                style={{
+                                  backgroundColor: "#1E5F74",
+                                  border: "none",
+                                }}
                                 size="sm"
                               >
                                 Click

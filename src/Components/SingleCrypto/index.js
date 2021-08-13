@@ -4,7 +4,7 @@ const SingleCrypto = () => {
   const { cryptos } = useCrypto();
   const { id } = useParams();
   const filter = cryptos.filter((item) => item.id === id);
-
+  console.log(id);
   return (
     <>
       {filter.map((item) => (
