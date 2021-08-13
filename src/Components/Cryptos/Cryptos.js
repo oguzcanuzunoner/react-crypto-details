@@ -7,7 +7,13 @@ const Cryptos = () => {
   const { cryptos, loading, search, getCryptoName } = useCrypto();
   return (
     <>
-      {loading && <div>Yükleniyor</div>}
+      {loading && (
+        <div>
+          <ReactBootStrap.Container>
+            <ReactBootStrap.ProgressBar now={50} />
+          </ReactBootStrap.Container>
+        </div>
+      )}
       {!loading && (
         <ReactBootStrap.Container>
           <ReactBootStrap.Row>
