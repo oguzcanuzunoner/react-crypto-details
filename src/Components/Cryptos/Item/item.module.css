@@ -1,0 +1,27 @@
+.link{
+    text-decoration: none;
+    color: transparent;
+    background: transparent;
+}
+.link .item{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px 20px;
+    align-items: center;
+    border-bottom: 1px solid var(--grey);
+    transition: var(--duration);
+}
+.link:nth-child(odd) .item{
+    background-color: #38373747;
+}
+.link .item:hover{
+    background-color: #5d5d5d47;
+}
+.item td{
+    border: none;
+    background-color: transparent;
+}
+.item img{
+    background-color: transparent;
+    width: 40px;
+}

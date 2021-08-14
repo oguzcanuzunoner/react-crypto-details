@@ -1,10 +1,30 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCrypto } from "../../Context/CryptoContext";
+
 const SingleCrypto = () => {
+
+  const [data, setData] = useState()
   const { cryptos } = useCrypto();
   const { id } = useParams();
   const filter = cryptos.filter((item) => item.id === id);
   console.log(id);
+  console.log(filter)
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/coins/bitcoin"
+      )
+      .then((response) => {
+        setData(response.data);
+        console.log("data")
+        console.log(response.data)
+      })
+      .catch((err) => alert(err));
+  }, []);
+
   return (
     <>
       {filter.map((item) => (
