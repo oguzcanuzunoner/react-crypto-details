@@ -19,20 +19,11 @@
 
 .tableHead{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   padding: 10px 20px;
   align-items: center;
   border-bottom: 1px solid var(--grey);
 }
 .tableHead th{
   border: none;
-}
-
-@media screen and (max-width: 572px) {
-  .tableHead{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-  .tableHead th:nth-child(2){
-      display: none
-  }
 }

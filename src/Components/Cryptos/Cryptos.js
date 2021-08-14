@@ -36,7 +36,6 @@ const Cryptos = () => {
                     <th>Price</th>
                     <th>Market Range</th>
                     {/* <th>Last 7 Days</th> */}
-                    <th>Details</th>
                   </tr>
                 </thead>
 

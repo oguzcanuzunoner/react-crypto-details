@@ -4,6 +4,10 @@ import * as ReactBootStrap from "react-bootstrap";
 
 function Item({val}) {
     return(
+      <Link
+        to={val.id}
+        className={Style.link}
+      >
         <tr className={Style.item}>
           <td>
             <img
@@ -23,37 +27,8 @@ function Item({val}) {
               {val.market_cap_change_percentage_24h.toFixed(2)}
             </td>
           )}
-
-          {/* <td>
-        <img
-          alt={`${val.symbol.toUpperCase()} 7d chart`}
-          data-src={`https://www.coingecko.com/coins/${chart_rank}/sparkline`}
-          data-srcset={`https://www.coingecko.com/coins/${chart_rank}/sparkline 1x`}
-          src={`https://www.coingecko.com/coins/${chart_rank}/sparkline`}
-          srcSet={`https://www.coingecko.com/coins/${chart_rank}/sparkline 1x`}
-        ></img>
-      </td> */}
-      
-          <td>
-            <Link
-              to={val.id}
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-              }}
-            >
-              <ReactBootStrap.Button
-                style={{
-                  backgroundColor: "#1E5F74",
-                  border: "none",
-                }}
-                size="sm"
-              >
-                Click
-              </ReactBootStrap.Button>
-            </Link>
-          </td>
         </tr>
+      </Link>
     )
 }
 
