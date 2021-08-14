@@ -1,3 +1,10 @@
+:root{
+  --grey: #757575;
+  --white: #FCDAB7;
+  
+  --duration: 200ms
+}
+
 * {
   background-color: #1d2d50;
   color: #fcdab7;

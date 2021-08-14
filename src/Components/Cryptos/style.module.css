@@ -1,13 +1,38 @@
 .searchTerm {
   width: 100%;
-  border: 3px solid #fcdab7;
+  border: 1px solid var(--grey);
+  border-radius: 10px;
   padding: 20px;
   height: 20px;
   outline: none;
-  color: yellow;
+  color: var(--grey);
+  background-color: transparent;
+  margin-top: 10px;
   margin-bottom: 10px;
+  transition: var(--duration);
 }
 
 .searchTerm:focus {
-  color: #fcdab7;
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.tableHead{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 10px 20px;
+  align-items: center;
+  border-bottom: 1px solid var(--grey);
+}
+.tableHead th{
+  border: none;
+}
+
+@media screen and (max-width: 572px) {
+  .tableHead{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .tableHead th:nth-child(2){
+      display: none
+  }
 }
