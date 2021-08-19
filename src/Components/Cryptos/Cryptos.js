@@ -2,7 +2,6 @@ import { useCrypto } from "../../Context/CryptoContext";
 import styled from "./style.module.css";
 import * as ReactBootStrap from "react-bootstrap";
 import Item from "./Item/item";
-import Favorite from "./Item/Favorite";
 import { useState } from "react"
 
 const Cryptos = () => {
@@ -36,7 +35,6 @@ const Cryptos = () => {
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
           <button style={{ width: "100%", height: "30px" }}
-            // (!isFavorite ? isFavorite : !isFavorite)
             onClick={() => setIsFavorite(!isFavorite)}>
             {!isFavorite ? "Get Favorite List" : "Get All Crypto"}
           </button>
@@ -79,7 +77,7 @@ const Cryptos = () => {
                     })
                       .map((val) => {
                         return (
-                          <Favorite
+                          <Item
                             key={val.id}
                             val={val}
                           />
