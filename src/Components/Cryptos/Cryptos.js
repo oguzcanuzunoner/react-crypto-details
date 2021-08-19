@@ -69,44 +69,56 @@ const Cryptos = () => {
                 <tbody>
                   {favorite.length > 0 &&
                     isFavorite &&
-                    favorite.map((val) => (
-                      // return <Item key={val.id} val={val} />;
-                      <tr className={styled.item} key={val.id}>
-                        <td>
-                          <Link to={val.id} className={styled.linkStyle}>
-                            <img
-                              src={val.image}
-                              alt={val.symbol.toUpperCase()}
-                            />
-                          </Link>
-                        </td>
-                        <td>
-                          <Link to={val.id} className={styled.linkStyle}>
-                            {val.name}
-                          </Link>
-                        </td>
-                        <td>
-                          <Link to={val.id} className={styled.linkStyle}>
-                            {val.current_price}
-                          </Link>
-                        </td>
-                        {val.market_cap_change_percentage_24h < 0 ? (
-                          <td style={{ color: "#C62A88" }}>
+                    favorite
+                      .filter((val) => {
+                        if (search === "") return val;
+                        else
+                          return val.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase());
+                      })
+                      .map((val) => (
+                        // return <Item key={val.id} val={val} />;
+                        <tr className={styled.item} key={val.id}>
+                          <td>
                             <Link to={val.id} className={styled.linkStyle}>
-                              {val.market_cap_change_percentage_24h.toFixed(2)}
+                              <img
+                                src={val.image}
+                                alt={val.symbol.toUpperCase()}
+                              />
                             </Link>
                           </td>
-                        ) : (
-                          <td style={{ color: "#03C4A1" }}>
+                          <td>
                             <Link to={val.id} className={styled.linkStyle}>
-                              {val.market_cap_change_percentage_24h.toFixed(2)}
+                              {val.name}
                             </Link>
                           </td>
-                        )}
+                          <td>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              {val.current_price}
+                            </Link>
+                          </td>
+                          {val.market_cap_change_percentage_24h < 0 ? (
+                            <td style={{ color: "#C62A88" }}>
+                              <Link to={val.id} className={styled.linkStyle}>
+                                {val.market_cap_change_percentage_24h.toFixed(
+                                  2
+                                )}
+                              </Link>
+                            </td>
+                          ) : (
+                            <td style={{ color: "#03C4A1" }}>
+                              <Link to={val.id} className={styled.linkStyle}>
+                                {val.market_cap_change_percentage_24h.toFixed(
+                                  2
+                                )}
+                              </Link>
+                            </td>
+                          )}
 
-                        <td onClick={() => removeFavorite(val)}>Remove</td>
-                      </tr>
-                    ))}
+                          <td onClick={() => removeFavorite(val)}>Remove</td>
+                        </tr>
+                      ))}
                   {!isFavorite &&
                     cryptos
                       .filter((val) => {
