@@ -1,8 +1,8 @@
-:root{
+:root {
   --grey: #757575;
-  --white: #FCDAB7;
-  
-  --duration: 200ms
+  --white: #fcdab7;
+
+  --duration: 200ms;
 }
 
 * {

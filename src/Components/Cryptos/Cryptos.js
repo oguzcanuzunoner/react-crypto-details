@@ -1,13 +1,16 @@
 import { useCrypto } from "../../Context/CryptoContext";
 import styled from "./style.module.css";
 import * as ReactBootStrap from "react-bootstrap";
-import Item from "./Item/item";
-import { useState } from "react"
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Cryptos = () => {
-  const { cryptos, loading, search, getCryptoName } = useCrypto();
-  const [isFavorite, setIsFavorite] = useState(false)
-
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { cryptos, loading, search, getCryptoName, favorite, setFavorite } =
+    useCrypto();
+  useEffect(() => {
+    console.log(favorite);
+  }, [favorite]);
   return (
     <>
       {loading && (
@@ -21,7 +24,7 @@ const Cryptos = () => {
         <ReactBootStrap.Container>
           <ReactBootStrap.Row>
             <ReactBootStrap.Col>
-              <form onSubmit={e => e.preventDefault()}>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div className={styled.search}>
                   <input
                     className={styled.searchTerm}
@@ -34,8 +37,10 @@ const Cryptos = () => {
               </form>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
-          <button style={{ width: "100%", height: "30px" }}
-            onClick={() => setIsFavorite(!isFavorite)}>
+          <button
+            style={{ width: "100%", height: "30px" }}
+            onClick={() => setIsFavorite(!isFavorite)}
+          >
             {!isFavorite ? "Get Favorite List" : "Get All Crypto"}
           </button>
           <ReactBootStrap.Row>
@@ -45,46 +50,67 @@ const Cryptos = () => {
                   <tr className={styled.tableHead}>
                     <th>Image</th>
                     <th>Name</th>
-                    {/* <th>Symbol</th> */}
                     <th>Price</th>
                     <th>Market Range</th>
-                    {/* <th>Last 7 Days</th> */}
                     <th>Favorite</th>
                   </tr>
                 </thead>
 
-                {!isFavorite && <tbody>
-                  {
-                    cryptos.filter((val) => {
+                <tbody>
+                  {cryptos
+                    .filter((val) => {
                       if (search === "") return val;
-                      else return val.name.toLowerCase().includes(search.toLowerCase());
+                      else
+                        return val.name
+                          .toLowerCase()
+                          .includes(search.toLowerCase());
                     })
-                      .map((val) => {
-                        return (
-                          <Item
-                            key={val.id}
-                            val={val}
-                          />
-                        );
-                      })
-                  }
-                </tbody>}
-                {isFavorite && <tbody>
-                  {
-                    cryptos.filter((val) => {
-                      if (search === "") return val.favorite === true;
-                      else return val.favorite === true && val.name.toLowerCase().includes(search.toLowerCase());
-                    })
-                      .map((val) => {
-                        return (
-                          <Item
-                            key={val.id}
-                            val={val}
-                          />
-                        );
-                      })
-                  }
-                </tbody>}
+                    .map((val) => (
+                      // return <Item key={val.id} val={val} />;
+                      <tr className={styled.item} key={val.id}>
+                        <td>
+                          <Link to={val.id} className={styled.linkStyle}>
+                            <img
+                              src={val.image}
+                              alt={val.symbol.toUpperCase()}
+                            />
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to={val.id} className={styled.linkStyle}>
+                            {val.name}
+                          </Link>
+                        </td>
+                        <td>
+                          <Link to={val.id} className={styled.linkStyle}>
+                            {val.current_price}
+                          </Link>
+                        </td>
+                        {val.market_cap_change_percentage_24h < 0 ? (
+                          <td style={{ color: "#C62A88" }}>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              {val.market_cap_change_percentage_24h.toFixed(2)}
+                            </Link>
+                          </td>
+                        ) : (
+                          <td style={{ color: "#03C4A1" }}>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              {val.market_cap_change_percentage_24h.toFixed(2)}
+                            </Link>
+                          </td>
+                        )}
+
+                        <td
+                          onClick={() =>
+                            setFavorite((prev) => [...prev, val.id])
+                          }
+                        >
+                          {/* <img src={val.image} alt={val.symbol.toUpperCase()} /> */}
+                          Favori
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
               </ReactBootStrap.Table>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
