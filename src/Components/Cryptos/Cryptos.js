@@ -3,6 +3,8 @@ import styled from "./style.module.css";
 import * as ReactBootStrap from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Fav from "../../assents/fav.png";
+import NotFav from "../../assents/notFav.png";
 
 const Cryptos = () => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -11,6 +13,14 @@ const Cryptos = () => {
   useEffect(() => {
     console.log(favorite);
   }, [favorite]);
+
+  const removeFavorite = (crypt) => {
+    const checkControl = favorite.find((item) => item.id === crypt.id);
+    if (checkControl) {
+      setFavorite([...favorite.filter((item) => item.id !== crypt.id)]);
+    }
+  };
+
   return (
     <>
       {loading && (
@@ -57,15 +67,9 @@ const Cryptos = () => {
                 </thead>
 
                 <tbody>
-                  {cryptos
-                    .filter((val) => {
-                      if (search === "") return val;
-                      else
-                        return val.name
-                          .toLowerCase()
-                          .includes(search.toLowerCase());
-                    })
-                    .map((val) => (
+                  {favorite.length > 0 &&
+                    isFavorite &&
+                    favorite.map((val) => (
                       // return <Item key={val.id} val={val} />;
                       <tr className={styled.item} key={val.id}>
                         <td>
@@ -100,16 +104,72 @@ const Cryptos = () => {
                           </td>
                         )}
 
-                        <td
-                          onClick={() =>
-                            setFavorite((prev) => [...prev, val.id])
-                          }
-                        >
-                          {/* <img src={val.image} alt={val.symbol.toUpperCase()} /> */}
-                          Favori
-                        </td>
+                        <td onClick={() => removeFavorite(val)}>Remove</td>
                       </tr>
                     ))}
+                  {!isFavorite &&
+                    cryptos
+                      .filter((val) => {
+                        if (search === "") return val;
+                        else
+                          return val.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase());
+                      })
+                      .map((val) => (
+                        // return <Item key={val.id} val={val} />;
+                        <tr className={styled.item} key={val.id}>
+                          <td>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              <img
+                                src={val.image}
+                                alt={val.symbol.toUpperCase()}
+                              />
+                            </Link>
+                          </td>
+                          <td>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              {val.name}
+                            </Link>
+                          </td>
+                          <td>
+                            <Link to={val.id} className={styled.linkStyle}>
+                              {val.current_price}
+                            </Link>
+                          </td>
+                          {val.market_cap_change_percentage_24h < 0 ? (
+                            <td style={{ color: "#C62A88" }}>
+                              <Link to={val.id} className={styled.linkStyle}>
+                                {val.market_cap_change_percentage_24h.toFixed(
+                                  2
+                                )}
+                              </Link>
+                            </td>
+                          ) : (
+                            <td style={{ color: "#03C4A1" }}>
+                              <Link to={val.id} className={styled.linkStyle}>
+                                {val.market_cap_change_percentage_24h.toFixed(
+                                  2
+                                )}
+                              </Link>
+                            </td>
+                          )}
+
+                          <td
+                            onClick={() => {
+                              favorite.find((item) => item.id === val.id)
+                                ? removeFavorite(val)
+                                : setFavorite((prev) => [...prev, val]);
+                            }}
+                          >
+                            {favorite.find((item) => item.id === val.id) ? (
+                              <img src={Fav} alt="favorite" />
+                            ) : (
+                              <img src={NotFav} alt="favorite" />
+                            )}
+                          </td>
+                        </tr>
+                      ))}
                 </tbody>
               </ReactBootStrap.Table>
             </ReactBootStrap.Col>
