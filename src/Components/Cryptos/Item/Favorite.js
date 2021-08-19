@@ -9,7 +9,7 @@ function Item({ val }) {
   const handleRowClick = (row) => {
     history.push(`/${row.id}`);
   };
-  
+
   return (
     <tr className={Style.item}>
       <td onClick={() => handleRowClick(val)}>
@@ -31,6 +31,7 @@ function Item({ val }) {
         alt={val.symbol.toUpperCase()} /></td>
     </tr>
   );
+
 }
 
 export default Item;

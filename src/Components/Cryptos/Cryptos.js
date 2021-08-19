@@ -2,9 +2,13 @@ import { useCrypto } from "../../Context/CryptoContext";
 import styled from "./style.module.css";
 import * as ReactBootStrap from "react-bootstrap";
 import Item from "./Item/item";
+import Favorite from "./Item/Favorite";
+import { useState } from "react"
 
 const Cryptos = () => {
   const { cryptos, loading, search, getCryptoName } = useCrypto();
+  const [isFavorite, setIsFavorite] = useState(false)
+
   return (
     <>
       {loading && (
@@ -18,7 +22,7 @@ const Cryptos = () => {
         <ReactBootStrap.Container>
           <ReactBootStrap.Row>
             <ReactBootStrap.Col>
-              <form>
+              <form onSubmit={e => e.preventDefault()}>
                 <div className={styled.search}>
                   <input
                     className={styled.searchTerm}
@@ -31,6 +35,11 @@ const Cryptos = () => {
               </form>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
+          <button style={{ width: "100%", height: "30px" }}
+            // (!isFavorite ? isFavorite : !isFavorite)
+            onClick={() => setIsFavorite(!isFavorite)}>
+            {!isFavorite ? "Get Favorite List" : "Get All Crypto"}
+          </button>
           <ReactBootStrap.Row>
             <ReactBootStrap.Col>
               <ReactBootStrap.Table responsive size="sm">
@@ -42,25 +51,42 @@ const Cryptos = () => {
                     <th>Price</th>
                     <th>Market Range</th>
                     {/* <th>Last 7 Days</th> */}
+                    <th>Favorite</th>
                   </tr>
                 </thead>
 
-                <tbody>
+                {!isFavorite && <tbody>
                   {
                     cryptos.filter((val) => {
-                      if (search === "") return val; 
+                      if (search === "") return val;
                       else return val.name.toLowerCase().includes(search.toLowerCase());
                     })
-                    .map((val) => {
-                      return (
-                        <Item
-                          key={val.id}
-                          val={val}
-                        />
-                      );
-                    })
+                      .map((val) => {
+                        return (
+                          <Item
+                            key={val.id}
+                            val={val}
+                          />
+                        );
+                      })
                   }
-                </tbody>
+                </tbody>}
+                {isFavorite && <tbody>
+                  {
+                    cryptos.filter((val) => {
+                      if (search === "") return val.favorite === true;
+                      else return val.favorite === true && val.name.toLowerCase().includes(search.toLowerCase());
+                    })
+                      .map((val) => {
+                        return (
+                          <Favorite
+                            key={val.id}
+                            val={val}
+                          />
+                        );
+                      })
+                  }
+                </tbody>}
               </ReactBootStrap.Table>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>

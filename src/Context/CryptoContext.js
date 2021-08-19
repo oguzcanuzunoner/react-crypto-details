@@ -7,9 +7,15 @@ const CryptoProvider = ({ children }) => {
   const [cryptos, setCryptos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
   const getCryptoName = (e) => {
     setSearch(e.target.value.toUpperCase());
   };
+
+  const getFavorite = (crypto) => {
+    crypto.favorite = (!crypto.favorite ? crypto.favorite=true : !crypto.favorite);
+    console.log(crypto);
+  }
 
   useEffect(() => {
     axios
@@ -30,6 +36,7 @@ const CryptoProvider = ({ children }) => {
       loading,
       search,
       getCryptoName,
+      getFavorite,
     }),
     [cryptos, loading, search]
   );
