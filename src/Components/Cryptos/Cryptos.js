@@ -10,15 +10,34 @@ const Cryptos = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { cryptos, loading, search, getCryptoName, favorite, setFavorite } =
     useCrypto();
+
+  // localStorage.getItem("favorite") ? localStorage.getItem("favorite") : localStorage.setItem("favorite", [])
+
   useEffect(() => {
     console.log(favorite);
   }, [favorite]);
 
+  const addFavorite = (crypt) => {
+    const checkControl = favorite.find((cr) => cr.id === crypt.id);
+    console.log(favorite)
+    if (checkControl) {
+      setFavorite(
+        favorite.map((cr) => (cr.id === crypt.id ? { ...checkControl } : cr))
+      );
+      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]))
+    } else {
+      setFavorite([...favorite, { ...crypt }]);
+      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]))
+    }
+
+  };
+
   const removeFavorite = (crypt) => {
-    const checkControl = favorite.find((item) => item.id === crypt.id);
+    const checkControl = favorite.find((x) => x.id === crypt.id);
     if (checkControl) {
       setFavorite([...favorite.filter((item) => item.id !== crypt.id)]);
     }
+    localStorage.setItem("favorite", JSON.stringify([...favorite.filter(rem => rem.id !== crypt.id)]))
   };
 
   return (
@@ -174,7 +193,7 @@ const Cryptos = () => {
                             onClick={() => {
                               favorite.find((item) => item.id === val.id)
                                 ? removeFavorite(val)
-                                : setFavorite((prev) => [...prev, val]);
+                                : addFavorite(val);
                             }}
                           >
                             {favorite.find((item) => item.id === val.id) ? (

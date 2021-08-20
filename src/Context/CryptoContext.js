@@ -7,7 +7,7 @@ const CryptoProvider = ({ children }) => {
   const [cryptos, setCryptos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [favorite, setFavorite] = useState([]);
+  const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem("favorite")) ? JSON.parse(localStorage.getItem("favorite")) : []);
 
   const getCryptoName = (e) => {
     setSearch(e.target.value.toUpperCase());
