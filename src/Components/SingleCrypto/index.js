@@ -27,7 +27,7 @@ const SingleCrypto = () => {
           </ReactBootStrap.Row>
           <ReactBootStrap.Row>
             <ReactBootStrap.Col>
-              <ReactBootStrap.Table responsive size="sm">
+              <ReactBootStrap.Table responsive size="sm" striped bordered hover>
                 <thead>
                   <tr>
                     <th style={{ fontSize: "12px" }}>Current Price </th>
