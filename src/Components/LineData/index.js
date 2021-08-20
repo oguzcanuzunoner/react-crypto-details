@@ -1,5 +1,4 @@
 import { Line } from "react-chartjs-2";
-
 const LineChart = ({ current, low_24h, high_24h }) => {
   const data = {
     labels: ["Low_24H", "Current", "High_24H"],
