@@ -3,3 +3,13 @@
   justify-content: space-around;
   align-items: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .nameImg {
+    display: flex;
+    flex-direction: column;
+  }
+  .nameImg h1 {
+    font-size: medium;
+  }
+}

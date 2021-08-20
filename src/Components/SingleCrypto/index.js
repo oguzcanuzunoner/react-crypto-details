@@ -18,38 +18,48 @@ const SingleCrypto = () => {
           <ReactBootStrap.Row className="m-5">
             <ReactBootStrap.Col>
               <div className={styled.nameImg}>
-                <h1>Coin Name : {item.name}</h1>
+                <h1>
+                  Coin Name : <b> {item.name} </b>
+                </h1>
                 <img src={item.image} height="50px" alt={item.id} />
               </div>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
           <ReactBootStrap.Row>
             <ReactBootStrap.Col>
-              <ReactBootStrap.Table>
+              <ReactBootStrap.Table responsive size="sm">
                 <thead>
                   <tr>
-                    <th>Current Price </th>
-                    <th>Coin Cap Rank </th>
-                    <th>Total Volume </th>
-                    <th>Last Updated </th>
-                    <th>Price Change Percentage - 24h </th>
+                    <th style={{ fontSize: "12px" }}>Current Price </th>
+                    <th style={{ fontSize: "12px" }}>Coin Cap Rank </th>
+                    <th style={{ fontSize: "12px" }}>Total Volume </th>
+                    <th style={{ fontSize: "12px" }}>Last Updated </th>
+                    <th style={{ fontSize: "12px" }}>
+                      Price Change Percentage - 24h{" "}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{item.current_price}</td>
-                    <td>{item.market_cap_rank}</td>
-                    <td>{item.total_volume}</td>
-                    <td>
+                    <td style={{ fontSize: "11px" }}>{item.current_price}</td>
+                    <td style={{ fontSize: "11px" }}>{item.market_cap_rank}</td>
+                    <td style={{ fontSize: "11px" }}>{item.total_volume}</td>
+                    <td style={{ fontSize: "11px" }}>
                       <Moment format="YYYY/MM/DD - hh:mm:ss">
                         {item.last_updated}
                       </Moment>
                     </td>
-                    <td>{item.price_change_percentage_24h}</td>
+                    <td style={{ fontSize: "15px" }}>
+                      {" "}
+                      {item.price_change_percentage_24h}
+                    </td>
                   </tr>
                 </tbody>
               </ReactBootStrap.Table>
-
+            </ReactBootStrap.Col>
+          </ReactBootStrap.Row>
+          <ReactBootStrap.Row>
+            <ReactBootStrap.Col>
               <LineData
                 current={item.current_price}
                 low_24h={item.low_24h}

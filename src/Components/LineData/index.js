@@ -14,6 +14,8 @@ const LineChart = ({ current, low_24h, high_24h }) => {
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: true,
     scales: {
       yAxes: [
         {
@@ -29,7 +31,7 @@ const LineChart = ({ current, low_24h, high_24h }) => {
       <div className="header">
         <h5 className="title">Last Data</h5>
       </div>
-      <Line data={data} options={options} height={10} width={50} />
+      <Line data={data} options={options} />
     </div>
   );
 };
