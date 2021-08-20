@@ -10,6 +10,8 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
+    width: 50vw;
 }
 .content small{
     font-size: 10px;
@@ -56,4 +58,19 @@
 }
 .down{
     color: #c62a88;
+}
+
+@media screen and (max-width: 576px) {
+    .head{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .headText{
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 992px) {
+    .content{
+        width: fit-content;
+    }
 }
