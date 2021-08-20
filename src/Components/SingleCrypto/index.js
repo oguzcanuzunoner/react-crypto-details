@@ -19,7 +19,7 @@ const SingleCrypto = () => {
             <ReactBootStrap.Col>
               <div className={styled.nameImg}>
                 <h1>Coin Name : {item.name}</h1>
-                <img src={item.image} height="50px" alt={item.id} />
+                <img src={item.image} height="75px" alt={item.id} />
               </div>
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
