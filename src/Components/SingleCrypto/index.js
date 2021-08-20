@@ -1,8 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useCrypto } from "../../Context/CryptoContext";
+import LineData from "../LineData/index";
+import styled from "./style.module.css";
+import Moment from "react-moment";
+
+import * as ReactBootStrap from "react-bootstrap";
 
 const SingleCrypto = () => {
-
   const { cryptos } = useCrypto();
   const { id } = useParams();
   const filter = cryptos.filter((item) => item.id === id);
@@ -10,34 +14,50 @@ const SingleCrypto = () => {
   return (
     <>
       {filter.map((item) => (
-        <div key={item.id}>
-          <div>
-            <img src={item.image} height="100px" alt={item.id} />
-          </div>
-          <h5> Current Price : {item.current_price}</h5>
-          <h5>Coin Name : {item.name}</h5>
-          <h5>Coin Cap Rank : {item.market_cap_rank}</h5>
-          <h5> Total Volume : {item.total_volume}</h5>
-          <h5>Last Updated : {item.last_updated}</h5>
-          <h5>
-            Price Change Percentage - 24h :{item.price_change_percentage_24h}
-          </h5>
-          <img
-            alt={`${item.symbol.toUpperCase()} 7d chart`}
-            data-src={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline`}
-            data-srcset={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline 1x`}
-            src={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline`}
-            srcSet={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline 1x`}
-          ></img>
-        </div>
+        <ReactBootStrap.Container key={item.id}>
+          <ReactBootStrap.Row className="m-5">
+            <ReactBootStrap.Col>
+              <div className={styled.nameImg}>
+                <h1>Coin Name : {item.name}</h1>
+                <img src={item.image} height="50px" alt={item.id} />
+              </div>
+            </ReactBootStrap.Col>
+          </ReactBootStrap.Row>
+          <ReactBootStrap.Row>
+            <ReactBootStrap.Col>
+              <ReactBootStrap.Table>
+                <thead>
+                  <tr>
+                    <th>Current Price </th>
+                    <th>Coin Cap Rank </th>
+                    <th>Total Volume </th>
+                    <th>Last Updated </th>
+                    <th>Price Change Percentage - 24h </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{item.current_price}</td>
+                    <td>{item.market_cap_rank}</td>
+                    <td>{item.total_volume}</td>
+                    <td>
+                      <Moment format="YYYY/MM/DD - hh:mm:ss">
+                        {item.last_updated}
+                      </Moment>
+                    </td>
+                    <td>{item.price_change_percentage_24h}</td>
+                  </tr>
+                </tbody>
+              </ReactBootStrap.Table>
+
+              <LineData
+                current={item.current_price}
+                low_24h={item.low_24h}
+                high_24h={item.high_24h}
+              />
+            </ReactBootStrap.Col>
+          </ReactBootStrap.Row>
+        </ReactBootStrap.Container>
       ))}
     </>
   );

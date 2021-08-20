@@ -78,7 +78,6 @@ const Cryptos = () => {
                             .includes(search.toLowerCase());
                       })
                       .map((val) => (
-                        // return <Item key={val.id} val={val} />;
                         <tr className={styled.item} key={val.id}>
                           <td>
                             <Link to={val.id} className={styled.linkStyle}>
@@ -129,7 +128,6 @@ const Cryptos = () => {
                             .includes(search.toLowerCase());
                       })
                       .map((val) => (
-                        // return <Item key={val.id} val={val} />;
                         <tr className={styled.item} key={val.id}>
                           <td>
                             <Link to={val.id} className={styled.linkStyle}>
