@@ -60,3 +60,21 @@
 .linkStyle:hover {
   color: inherit;
 }
+
+.getButton {
+  color: var(--white);
+  background-color: transparent;
+  border: 1px solid var(--grey);
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+  transition: var(--duration);
+}
+.getButton:hover {
+  color: var(--grey);
+  border: 1px solid var(--white);
+}
+
+.remove:hover {
+  color: var(--grey);
+}

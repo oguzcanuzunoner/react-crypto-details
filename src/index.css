@@ -5,11 +5,22 @@
   --duration: 200ms;
 }
 
-* {
-  background-color: #1d2d50;
+th,
+td,
+small,
+a,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #fcdab7;
 }
 body {
+  background-color: #1d2d50 !important;
   margin: 0;
   padding: 0;
   box-sizing: border-box;

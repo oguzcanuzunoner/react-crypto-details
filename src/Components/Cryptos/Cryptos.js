@@ -48,7 +48,7 @@ const Cryptos = () => {
             </ReactBootStrap.Col>
           </ReactBootStrap.Row>
           <button
-            style={{ width: "100%", height: "30px" }}
+            className={styled.getButton}
             onClick={() => setIsFavorite(!isFavorite)}
           >
             {!isFavorite ? "Get Favorite List" : "Get All Crypto"}
@@ -115,7 +115,12 @@ const Cryptos = () => {
                             </td>
                           )}
 
-                          <td onClick={() => removeFavorite(val)}>Remove</td>
+                          <td
+                            className={styled.remove}
+                            onClick={() => removeFavorite(val)}
+                          >
+                            Remove
+                          </td>
                         </tr>
                       ))}
                   {!isFavorite &&
