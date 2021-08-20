@@ -5,7 +5,6 @@ function Item({ val }) {
   const history = useHistory();
   const handleRowClick = (row) => {
     history.push(`/${row.id}`);
-    console.log(row);
   };
   return (
     <tr onClick={() => handleRowClick(val)} className={Style.item}>

@@ -1,63 +1,62 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCrypto } from "../../Context/CryptoContext";
+import cn from 'classnames'
+import LineData from "../LineData/index";
+
+import { Up, Down } from "../icons";
+import Style from './style.module.css'
 
 const SingleCrypto = () => {
 
-  const [data, setData] = useState()
+  const [item, setItem] = useState()
   const { cryptos } = useCrypto();
   const { id } = useParams();
-  const filter = cryptos.filter((item) => item.id === id);
-  console.log(id);
-  console.log(filter)
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/bitcoin"
-      )
-      .then((response) => {
-        setData(response.data);
-        console.log("data")
-        console.log(response.data)
-      })
-      .catch((err) => alert(err));
-  }, []);
+    setItem(cryptos && cryptos.filter((item) => item.id === id)[0])
+  }, [cryptos, id])
 
-  return (
-    <>
-      {filter.map((item) => (
-        <div key={item.id}>
-          <div>
-            <img src={item.image} height="100px" alt={item.id} />
+  const isUp = item && item.price_change_percentage_24h >= 0
+
+  return ( item !== undefined &&
+    <div className={Style.container}>
+      <div className={Style.content}>
+        
+        <div className={Style.head}>
+
+          <img src={item.image} height="100px" alt={item.id} />,
+
+          <div className={Style.headText}>
+
+            <h1 className={Style.name}>{item.name} <span>#{item.market_cap_rank}</span></h1>
+            
+            <div className={Style.prince}>
+
+              <h1 className={cn(isUp ? Style.up : Style.down)}>$ {item.current_price}</h1>
+
+              <span className={cn(isUp ? Style.up : Style.down)}>
+                {Math.floor(item.price_change_percentage_24h)}%
+                {isUp ? <Up/> : <Down/>}
+              </span>
+            </div>
+
+            <span className={Style.volume}> Total Volume : $ {item.total_volume}</span>
+            
           </div>
-          <h5> Current Price : {item.current_price}</h5>
-          <h5>Coin Name : {item.name}</h5>
-          <h5>Coin Cap Rank : {item.market_cap_rank}</h5>
-          <h5> Total Volume : {item.total_volume}</h5>
-          <h5>Last Updated : {item.last_updated}</h5>
-          <h5>
-            Price Change Percentage - 24h :{item.price_change_percentage_24h}
-          </h5>
-          <img
-            alt={`${item.symbol.toUpperCase()} 7d chart`}
-            data-src={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline`}
-            data-srcset={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline 1x`}
-            src={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline`}
-            srcSet={`https://www.coingecko.com/coins/${item.image.match(
-              /[0-9]+/
-            )}/sparkline 1x`}
-          ></img>
+
         </div>
-      ))}
-    </>
+
+        <LineData
+          low={item.low_24h}
+          high={item.high_24h}
+          current={item.current_price}
+          isUp={isUp}
+        />
+
+        <small>Last Updated : {item.last_updated}</small>
+      </div>
+    </div>
   );
 };
 export default SingleCrypto;
