@@ -51,7 +51,7 @@ Bu projede, Ana sayfada bütün kripto paraların güncel bilgilerine erişebili
   <img src="readme_image/single.PNG" alt="Single"/>
 </p>
 
-## DeveloperS
+## Developers
 ---
 [Oğuzcan Uzunöner](https://github.com/oguzcanuzunoner)
 <br>
