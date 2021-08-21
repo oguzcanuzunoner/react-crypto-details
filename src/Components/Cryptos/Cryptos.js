@@ -1,7 +1,7 @@
 import { useCrypto } from "../../Context/CryptoContext";
 import styled from "./style.module.css";
 import * as ReactBootStrap from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Fav from "../../assents/fav.png";
 import NotFav from "../../assents/notFav.png";
@@ -11,25 +11,18 @@ const Cryptos = () => {
   const { cryptos, loading, search, getCryptoName, favorite, setFavorite } =
     useCrypto();
 
-  // localStorage.getItem("favorite") ? localStorage.getItem("favorite") : localStorage.setItem("favorite", [])
-
-  useEffect(() => {
-    console.log(favorite);
-  }, [favorite]);
-
   const addFavorite = (crypt) => {
     const checkControl = favorite.find((cr) => cr.id === crypt.id);
-    console.log(favorite)
+
     if (checkControl) {
       setFavorite(
         favorite.map((cr) => (cr.id === crypt.id ? { ...checkControl } : cr))
       );
-      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]))
+      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]));
     } else {
       setFavorite([...favorite, { ...crypt }]);
-      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]))
+      localStorage.setItem("favorite", JSON.stringify([...favorite, crypt]));
     }
-
   };
 
   const removeFavorite = (crypt) => {
@@ -37,7 +30,10 @@ const Cryptos = () => {
     if (checkControl) {
       setFavorite([...favorite.filter((item) => item.id !== crypt.id)]);
     }
-    localStorage.setItem("favorite", JSON.stringify([...favorite.filter(rem => rem.id !== crypt.id)]))
+    localStorage.setItem(
+      "favorite",
+      JSON.stringify([...favorite.filter((rem) => rem.id !== crypt.id)])
+    );
   };
 
   return (
