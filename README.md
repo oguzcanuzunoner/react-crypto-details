@@ -1,3 +1,7 @@
+## NETLIFY DEMO
+
+[NETLIFY DEMO - CLICK ](https://react-crypto-details.netlify.app/)
+
 # Kripto Para Bilgilendirme Uygulaması
 
 Uygulamamızda, API'den çekilen kripto para bilgilerini listeliyoruz. Search kısmını kullanarak da arama işleminizi gerçekleştirebiliyorsunuz.
