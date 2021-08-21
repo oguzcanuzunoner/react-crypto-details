@@ -6,6 +6,7 @@ import LineData from "../LineData/index";
 import Moment from "react-moment";
 import { Up, Down } from "../icons";
 import Style from "./style.module.css";
+import { Link } from "react-router-dom";
 
 const SingleCrypto = () => {
   const [item, setItem] = useState();
@@ -23,7 +24,8 @@ const SingleCrypto = () => {
       <div className={Style.container}>
         <div className={Style.content}>
           <div className={Style.head}>
-            <img src={item.image} height="100px" alt={item.id} />,
+            <img src={item.image} height="100px" alt={item.id} />
+
             <div className={Style.headText}>
               <h1 className={Style.name}>
                 {item.name} <span>#{item.market_cap_rank}</span>
@@ -41,9 +43,13 @@ const SingleCrypto = () => {
               </div>
 
               <span className={Style.volume}>
-                {" "}
                 Total Volume : $ {item.total_volume}
               </span>
+            </div>
+            <div className={Style.buttonSide}>
+              <Link to="/">
+                <button className={Style.button}>Back</button>
+              </Link>
             </div>
           </div>
 
