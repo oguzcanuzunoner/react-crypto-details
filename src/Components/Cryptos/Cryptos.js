@@ -39,7 +39,7 @@ const Cryptos = () => {
   return (
     <>
       {loading && (
-        <div>
+        <div className="mt-4">
           <ReactBootStrap.Container>
             <ReactBootStrap.ProgressBar now={50} />
           </ReactBootStrap.Container>
@@ -93,7 +93,7 @@ const Cryptos = () => {
                             .includes(search.toLowerCase());
                       })
                       .map((val) => (
-                        <tr className={styled.item} key={val.id}>
+                        <tr className={styled.favoriteItem} key={val.id}>
                           <td>
                             <Link to={val.id} className={styled.linkStyle}>
                               <img
