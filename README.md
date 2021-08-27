@@ -12,6 +12,7 @@ Bu projede, Ana sayfada bütün kripto paraların güncel bilgilerine erişebili
 
 ## Proje Teknik Bilgileri
 
+* Responsive tasarımdır.
 * Dinamik Url yapısı için React-Router-Dom kullanılmıştır.
 * Bilgiler API'den çekilmiştir. Bunun için CoinGecko kullanılmıştır.
 * API'den veri çekmek için AXIOS kullanılmıştır.
